@@ -1,12 +1,21 @@
 package co.com.sofka.questions.dto;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class QuestionDTO {
     private String id;
     @NotBlank
@@ -18,11 +27,6 @@ public class QuestionDTO {
     @NotBlank
     private String category;
     private List<AnswerDTO> answers;
-
-
-    public QuestionDTO() {
-
-    }
 
     public QuestionDTO(String userId, String question, String type, String category) {
         this.userId = userId;
@@ -42,50 +46,6 @@ public class QuestionDTO {
     public List<AnswerDTO> getAnswers() {
         this.answers = Optional.ofNullable(answers).orElse(new ArrayList<>());
         return answers;
-    }
-
-    public void setAnswers(List<AnswerDTO> answers) {
-        this.answers = answers;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getQuestion() {
-        return question;
-    }
-
-    public void setQuestion(String question) {
-        this.question = question;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
     }
 
     @Override
