@@ -33,6 +33,11 @@ export class QuestionService {
     return this.http.get<QuestionI>(direction);
   }
 
+  getQuestions(): Observable<QuestionI[]> {
+    let direction = this.url + 'getAll';
+    return this.http.get<QuestionI[]>(direction);
+  }
+
   getTotalPages(): Observable<number> {
     let direction = this.url + 'totalPages';
     return this.http.get<number>(direction);
