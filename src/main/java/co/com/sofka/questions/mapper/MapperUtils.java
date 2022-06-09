@@ -1,9 +1,9 @@
 package co.com.sofka.questions.mapper;
 
-import co.com.sofka.questions.collections.Answer;
-import co.com.sofka.questions.collections.Question;
-import co.com.sofka.questions.model.AnswerDTO;
-import co.com.sofka.questions.model.QuestionDTO;
+import co.com.sofka.questions.model.Answer;
+import co.com.sofka.questions.model.Question;
+import co.com.sofka.questions.dto.AnswerDTO;
+import co.com.sofka.questions.dto.QuestionDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.function.Function;
