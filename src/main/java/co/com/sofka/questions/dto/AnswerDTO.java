@@ -1,4 +1,4 @@
-package co.com.sofka.questions.model;
+package co.com.sofka.questions.dto;
 
 
 import javax.validation.constraints.NotBlank;

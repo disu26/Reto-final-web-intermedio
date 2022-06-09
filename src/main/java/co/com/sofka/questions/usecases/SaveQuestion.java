@@ -1,6 +1,6 @@
 package co.com.sofka.questions.usecases;
 
-import co.com.sofka.questions.model.QuestionDTO;
+import co.com.sofka.questions.dto.QuestionDTO;
 import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
