@@ -12,6 +12,19 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: FirebaseExtended/action-hosting-deploy@v0
+      - uses: actions/setuo-node@v1
+        with:
+          node-version: '16.15.0'
+          - uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles{'**/package-lock.json'} }}
+          restore-keys: |
+          ${{ runner.os }}-node-
+          - name: Build
+          run: |
+          npm install 
+          npm run-script deploy
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_RETO_FULL_STACK }}'
