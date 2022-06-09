@@ -1,7 +1,8 @@
 package co.com.sofka.questions.usecases;
 
-import co.com.sofka.questions.collections.Question;
-import co.com.sofka.questions.model.QuestionDTO;
+import co.com.sofka.questions.mapper.MapperUtils;
+import co.com.sofka.questions.model.Question;
+import co.com.sofka.questions.dto.QuestionDTO;
 import co.com.sofka.questions.reposioties.QuestionRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
