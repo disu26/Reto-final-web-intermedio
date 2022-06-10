@@ -63,4 +63,9 @@ public class QuestionService {
                 .takeLast(10)
                 .map(mapperUtils.mapEntityToQuestion());
     }
+
+    public Mono<Long> getCountQuestions(){
+        return questionRepository.findAll()
+                .count();
+    }
 }
