@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService, Message } from 'primeng/api';
 import { ServiceService } from 'src/app/Service/service.service';
+import { FirebaseCodeErrorEnum } from 'src/app/utils/firebase-code-error';
 
 @Component({
   selector: 'app-login',
@@ -34,7 +35,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
-
+    
   ingresar() {
     this.mostrar = !this.mostrar;
     this.authService
@@ -56,7 +57,7 @@ export class LoginComponent implements OnInit {
 
   fireabaseError(code: string){
     switch (code) {
-      case 'auth/user-not-found':
+      case FirebaseCodeErrorEnum.UserNotFound:
         this.messageService.add({
           severity: 'error',
           summary: 'Rectifique los datos',
@@ -64,7 +65,7 @@ export class LoginComponent implements OnInit {
         });
         break;
 
-      case 'auth/wrong-password':
+      case FirebaseCodeErrorEnum.WrongPassword:
         this.messageService.add({
           severity: 'error',
           summary: 'Rectifique los datos',

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService, Message } from 'primeng/api';
 import { ServiceService } from 'src/app/Service/service.service';
+import { FirebaseCodeErrorEnum } from 'src/app/utils/firebase-code-error';
 
 @Component({
   selector: 'app-registro',
@@ -53,7 +54,7 @@ export class RegistroComponent implements OnInit {
 
   firebaseError(code: String){
     switch (code) {
-      case 'auth/email-already-in-use':
+      case FirebaseCodeErrorEnum.EmailAlreadyInUse:
         this.messageService.add({
           severity: 'error',
           summary: 'Usuario Registrado',
@@ -61,7 +62,7 @@ export class RegistroComponent implements OnInit {
         });
         break;
 
-      case 'auth/invalid-email':
+      case FirebaseCodeErrorEnum.InvalidEmail:
         this.messageService.add({
           severity: 'error',
           summary: 'Correo Invalido',

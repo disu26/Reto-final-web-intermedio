@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵɵqueryRefresh } from '@angular/core';
 import { Router } from '@angular/router';
+import { reload } from '@firebase/auth';
 import { ServiceService } from '../Service/service.service';
 
 @Component({
