@@ -68,4 +68,10 @@ public class QuestionService {
         return questionRepository.findAll()
                 .count();
     }
+
+    public Mono<Long> getTotalPages(){
+        return questionRepository.findAll()
+                .count()
+                .map(c -> (c+(10-(c%10)))/10);
+    }
 }
