@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService, Message } from 'primeng/api';
 import { ServiceService } from 'src/app/Service/service.service';
+import { FirebaseCodeErrorEnum } from 'src/app/utils/firebase-code-error';
 
 @Component({
   selector: 'app-registro',
@@ -33,8 +34,9 @@ export class RegistroComponent implements OnInit {
     this.mostrar = !this.mostrar;    
     this.authService
       .loginRegistre(this.form.value.email, this.form.value.password)
-      .then((res) => {       
-        if (res) {
+      .then((res:any) => { 
+        console.log(res.code)  
+        if (res == undefined) {
           this.messageService.add({
             severity: 'success',
             summary: '!Exitoso¡',
@@ -43,16 +45,38 @@ export class RegistroComponent implements OnInit {
           setTimeout(() => {
             this.route.navigate(['preguntas']);
           }, 2000);
-        } else {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Usuarios Registrado',
-            detail: 'Por favor intente con otro correo',
-          });
+        }else {
+          this.firebaseError(res.code);
         }
-
-        this.mostrar = !this.mostrar;
+        this.mostrar = !this.mostrar; 
       });
+  }
+
+  firebaseError(code: String){
+    switch (code) {
+      case FirebaseCodeErrorEnum.EmailAlreadyInUse:
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Usuario Registrado',
+          detail: 'Por favor intente con otro correo'
+        });
+        break;
+
+      case FirebaseCodeErrorEnum.InvalidEmail:
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Correo Invalido',
+          detail: 'Por favor intente con un correo válido'
+        });
+        break;
+
+      default:
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error Inesperado',
+          detail: 'Ha surgido un error desconocido'
+        });
+    }
   }
   ingresarGoogle() {
     this.mostrar = !this.mostrar;    

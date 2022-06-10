@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService, Message } from 'primeng/api';
 import { ServiceService } from 'src/app/Service/service.service';
+import { FirebaseCodeErrorEnum } from 'src/app/utils/firebase-code-error';
 
 @Component({
   selector: 'app-login',
@@ -34,29 +35,51 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
-
+    
   ingresar() {
     this.mostrar = !this.mostrar;
     this.authService
       .login(this.form.value.email, this.form.value.password)
-      .then((res) => {       
-        if (res == undefined) {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Rectifique los datos',
-            detail: 'Clave o Usuario incorrecto, Intente de Nuevo',
-          });
-        } else {
+      .then((res:any) => {    
+        if (res.operationType === 'signIn') {
           this.messageService.add({
             severity: 'success',
             summary: 'Bienvenido',
             detail: 'Disfruta de tu estadía',
           });
           this.route.navigate(['preguntas']);
+        } else {
+          this.fireabaseError(res.code);
         }
-
         this.mostrar = !this.mostrar;
       });
+  }
+
+  fireabaseError(code: string){
+    switch (code) {
+      case FirebaseCodeErrorEnum.UserNotFound:
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Rectifique los datos',
+          detail: 'Clave o Usuario incorrecto, Intente de Nuevo'
+        });
+        break;
+
+      case FirebaseCodeErrorEnum.WrongPassword:
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Rectifique los datos',
+          detail: 'Clave o Usuario incorrecto, Intente de Nuevo'
+        });
+        break;
+
+      default:
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error Inesperado',
+          detail: 'Ha surgido un error desconocido'
+        });
+    }
   }
   ingresarGoogle() {
     this.mostrar = !this.mostrar;       
@@ -120,12 +143,20 @@ export class LoginComponent implements OnInit {
   recuperarEmail() {
     try {
       this.mostrar2 = !this.mostrar2;
-      this.authService.resetPassword(this.form2.value.email).then((res) => {
+      this.authService.resetPassword(this.form2.value.email).then(() => {
         this.displayModal = false;
         this.messageService.add({
           severity: 'success',
           summary: '!Exitoso¡',
           detail: 'Revisa tu bandeja de entrada',
+        });
+      })
+      .catch(() => {
+        this.displayModal = false;
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Rectifique los datos',
+          detail: 'El correo no está registrado'
         });
       });
       this.mostrar2 = !this.mostrar2;
