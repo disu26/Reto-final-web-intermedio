@@ -54,4 +54,9 @@ public final class QuestionController {
     public Flux<QuestionDTO> getPage(@PathVariable("page") Integer page){
         return questionService.getPage(page);
     }
+
+    @GetMapping("/countQuestions")
+    public Mono<Long> getCountQuestions(){
+        return questionService.getCountQuestions();
+    }
 }
