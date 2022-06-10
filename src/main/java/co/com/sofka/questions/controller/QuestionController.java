@@ -59,4 +59,9 @@ public final class QuestionController {
     public Mono<Long> getCountQuestions(){
         return questionService.getCountQuestions();
     }
+
+    @GetMapping("/totalPages")
+    public Mono<Long> getTotalPages(){
+        return questionService.getTotalPages();
+    }
 }
