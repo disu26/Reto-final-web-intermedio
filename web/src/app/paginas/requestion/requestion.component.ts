@@ -14,7 +14,7 @@ import { ServiceService } from 'src/app/Service/service.service';
 export class RequestionComponent implements OnInit {
   
   question:QuestionI | undefined;
-  answers: AnswerI[] | undefined;
+  answers: AnswerI[]=[];
   answersNew: AnswerI[]=[];
   currentAnswer:number=0;
 
