@@ -64,4 +64,9 @@ public final class QuestionController {
     public Mono<Long> getTotalPages(){
         return questionService.getTotalPages();
     }
+
+    @PutMapping("/update")
+    public Mono<String> updateQuestion(@RequestBody QuestionDTO questionDTO){
+        return questionService.updateQuestion(questionDTO);
+    }
 }
