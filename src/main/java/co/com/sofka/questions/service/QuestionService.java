@@ -54,4 +54,13 @@ public class QuestionService {
                 .save(mapperUtils.mapperToQuestion(dto.getId()).apply(dto))
                 .map(Question::getId);
     }
+    
+    public Flux<QuestionDTO> getPage(Integer page){
+        Long end = Long.valueOf((page+1)*10);
+        
+        return questionRepository.findAll()
+                .take(end)
+                .takeLast(10)
+                .map(mapperUtils.mapEntityToQuestion());
+    }
 }

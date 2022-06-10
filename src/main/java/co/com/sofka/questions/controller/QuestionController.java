@@ -49,4 +49,9 @@ public final class QuestionController {
     public Mono<Void> delete(@PathVariable("id") String id){
         return questionService.deleteQuestion(id);
     }
+    
+    @GetMapping("/pagination/{page}")
+    public Flux<QuestionDTO> getPage(@PathVariable("page") Integer page){
+        return questionService.getPage(page);
+    }
 }
