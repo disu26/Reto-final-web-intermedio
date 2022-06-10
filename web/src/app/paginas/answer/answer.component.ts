@@ -48,6 +48,7 @@ export class AnswerComponent implements OnInit {
   }
 
   saveAnswer(): void {
+    console.log(this.answer);
     this.answer.userId = this.item.userId;
     this.answer.questionId = this.item.id;
     this.services.saveAnswer(this.answer).subscribe({
