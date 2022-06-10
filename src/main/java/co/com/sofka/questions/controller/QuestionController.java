@@ -69,4 +69,9 @@ public final class QuestionController {
     public Mono<String> updateQuestion(@RequestBody QuestionDTO questionDTO){
         return questionService.updateQuestion(questionDTO);
     }
+
+    @PutMapping("/updateAnswer")
+    public Mono<QuestionDTO> updateAnswer(@RequestBody AnswerDTO answerDTO){
+        return answerService.updateAnswer(answerDTO);
+    }
 }

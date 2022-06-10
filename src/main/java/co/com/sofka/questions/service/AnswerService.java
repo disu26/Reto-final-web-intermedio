@@ -38,6 +38,18 @@ public class AnswerService {
                     );
     }
 
+    public Mono<QuestionDTO> updateAnswer(AnswerDTO dto){
+        Objects.requireNonNull(dto.getQuestionId(), "Id of the answer is required");
+        return getQuestion(dto.getQuestionId())
+                .flatMap(question ->
+                        answerRepository.save(mapperUtils.mapperToAnswer().apply(dto))
+                                .map(answer -> {
+                                    question.getAnswers().add(dto);
+                                    return question;
+                                })
+                );
+    }
+
     public Mono<QuestionDTO> getQuestion(String id) {
         Objects.requireNonNull(id, "Id is required");
         return questionRepository.findById(id)

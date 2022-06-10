@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { AnswerI } from 'src/app/models/answer-i';
 import { QuestionI } from 'src/app/models/question-i';
 import { QuestionService } from 'src/app/Service/question.service';
+import { ServiceService } from 'src/app/Service/service.service';
 
 @Component({
   selector: 'app-requestion',
@@ -24,7 +26,8 @@ export class RequestionComponent implements OnInit {
     private route:ActivatedRoute,
     private questionService:QuestionService,
     private service: QuestionService,
-
+    public authService: ServiceService,
+    private messageService: MessageService,
     ) {
 
     }
@@ -60,6 +63,16 @@ export class RequestionComponent implements OnInit {
     for(let i = this.currentAnswer;i<last;i++){
     }
     this.currentAnswer+=10;
+  }
+
+  updateAnswer(answer:any){
+    this.service.updateAnswer(answer).subscribe(()=>{
+      this.messageService.add({
+        severity: 'success',
+        summary: '!Exitoso¡',
+        detail: 'Calificación actualizada'
+      });
+    })
   }
 
   onScroll() {
