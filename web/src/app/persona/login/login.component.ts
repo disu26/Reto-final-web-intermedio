@@ -143,12 +143,20 @@ export class LoginComponent implements OnInit {
   recuperarEmail() {
     try {
       this.mostrar2 = !this.mostrar2;
-      this.authService.resetPassword(this.form2.value.email).then((res) => {
+      this.authService.resetPassword(this.form2.value.email).then(() => {
         this.displayModal = false;
         this.messageService.add({
           severity: 'success',
           summary: '!Exitoso¡',
           detail: 'Revisa tu bandeja de entrada',
+        });
+      })
+      .catch(() => {
+        this.displayModal = false;
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Rectifique los datos',
+          detail: 'El correo no está registrado'
         });
       });
       this.mostrar2 = !this.mostrar2;

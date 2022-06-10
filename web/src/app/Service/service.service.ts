@@ -53,7 +53,7 @@ export class ServiceService {
     try {
       return this.afauth.sendPasswordResetEmail(email);
     } catch (error) {
-      return null;
+      return error;
     }
   }
   async loginGoogle(email: string, password: string) {
