@@ -45,7 +45,7 @@ export class ServiceService {
       return await this.afauth
         .createUserWithEmailAndPassword(email, password)        
     } catch (error) {
-      return null;
+      return error;
     }
   }
 
