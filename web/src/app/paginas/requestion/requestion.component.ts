@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AnswerI } from 'src/app/models/answer-i';
 import { QuestionI } from 'src/app/models/question-i';
 import { QuestionService } from 'src/app/Service/question.service';
+import { ServiceService } from 'src/app/Service/service.service';
 
 @Component({
   selector: 'app-requestion',
@@ -24,7 +25,7 @@ export class RequestionComponent implements OnInit {
     private route:ActivatedRoute,
     private questionService:QuestionService,
     private service: QuestionService,
-
+    public authService: ServiceService
     ) {
 
     }

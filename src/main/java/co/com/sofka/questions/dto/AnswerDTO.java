@@ -13,7 +13,6 @@ import java.util.Optional;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class AnswerDTO {
     @NotBlank(message = "Debe existir el userId para este objeto")
     private String userId;
@@ -21,13 +20,14 @@ public class AnswerDTO {
     private String questionId;
     @NotBlank
     private String answer;
-
+    @NotBlank
     private Integer position;
 
-    public AnswerDTO(@NotBlank String questionId, @NotBlank String userId, @NotBlank String answer) {
+    public AnswerDTO(@NotBlank String questionId, @NotBlank String userId, @NotBlank String answer, @NotBlank Integer position) {
         this.userId = userId;
         this.questionId = questionId;
         this.answer = answer;
+        this.position = position;
     }
 
     @Override
