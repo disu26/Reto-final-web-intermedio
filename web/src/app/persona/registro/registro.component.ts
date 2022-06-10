@@ -47,6 +47,7 @@ export class RegistroComponent implements OnInit {
         }else {
           this.firebaseError(res.code);
         }
+        this.mostrar = !this.mostrar; 
       });
   }
 

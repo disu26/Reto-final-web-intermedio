@@ -39,24 +39,46 @@ export class LoginComponent implements OnInit {
     this.mostrar = !this.mostrar;
     this.authService
       .login(this.form.value.email, this.form.value.password)
-      .then((res) => {       
-        if (res == undefined) {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Rectifique los datos',
-            detail: 'Clave o Usuario incorrecto, Intente de Nuevo',
-          });
-        } else {
+      .then((res:any) => {    
+        if (res.operationType === 'signIn') {
           this.messageService.add({
             severity: 'success',
             summary: 'Bienvenido',
             detail: 'Disfruta de tu estadía',
           });
           this.route.navigate(['preguntas']);
+        } else {
+          this.fireabaseError(res.code);
         }
-
         this.mostrar = !this.mostrar;
       });
+  }
+
+  fireabaseError(code: string){
+    switch (code) {
+      case 'auth/user-not-found':
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Rectifique los datos',
+          detail: 'Clave o Usuario incorrecto, Intente de Nuevo'
+        });
+        break;
+
+      case 'auth/wrong-password':
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Rectifique los datos',
+          detail: 'Clave o Usuario incorrecto, Intente de Nuevo'
+        });
+        break;
+
+      default:
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error Inesperado',
+          detail: 'Ha surgido un error desconocido'
+        });
+    }
   }
   ingresarGoogle() {
     this.mostrar = !this.mostrar;       

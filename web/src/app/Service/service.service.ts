@@ -37,7 +37,7 @@ export class ServiceService {
         .signInWithEmailAndPassword(email, password)      
         
     } catch (error) {
-      return null;
+      return error;
     }
   }
   async loginRegistre(email: string, password: string) {
@@ -65,11 +65,19 @@ export class ServiceService {
     }
   }
 
+  async logout() {
+    try{
+      return await this.afauth
+      .signOut();
+    }catch (error) {
+      return error;
+    }
+  }
+
   getUserLogged() {
     return this.afauth.authState;
   }
-
-
+  
   SetUserData(user: any) {
     const userRef: AngularFirestoreDocument<any> = this.store.doc(
       `users/${user.uid}`
