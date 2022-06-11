@@ -4,11 +4,11 @@
           <img src="https://ik.imagekit.io/lvh0tltbeph/SofkaU/logo-sofkau_1Fn3uH-1S.png?ik-sdk-version=javascript-1.4.3&updatedAt=1645658493330" alt="" width="200" height="75">
         </a>
         
-      <button type="button" label="User" class="" *ngIf="authService.userData">Bienvenido!! {{authService.userData.email}}</button>
+      <button type="button" label="User" class="p-element p-ripple p-button-outlined p-button p-component" *ngIf="authService.userData">Bienvenido!! {{authService.userData.email}}</button>
         
-      <button type="button" label="Iniciar Sesion" class="p-button-warning" (click)="login()" *ngIf="!authService.userData">Inicia sesión</button>
+      <button type="button" label="Iniciar Sesion" class="p-element p-ripple p-button-success p-button p-component" (click)="login()" *ngIf="!authService.userData">Inicia sesión</button>
       
-      <button type="button" label="Cerrar Sesion" class="p-button-warning" (click)="logout()" *ngIf="authService.userData">Cerrar sesión</button>
+      <button type="button" label="Cerrar Sesion" class="p-element p-ripple p-button-danger p-button p-component" (click)="logout()" *ngIf="authService.userData">Cerrar sesión</button>
      
     </div>
   </nav>
