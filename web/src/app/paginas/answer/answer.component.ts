@@ -35,10 +35,12 @@ export class AnswerComponent implements OnInit {
   ) {}
 
   answer: AnswerI = {
+    id: '',
     userId: '',
     questionId: '',
     answer: '',
     position: 0,
+    newPosition: 0,
   };
 
   ngOnInit(): void {}
@@ -48,9 +50,9 @@ export class AnswerComponent implements OnInit {
   }
 
   saveAnswer(): void {
-    console.log(this.answer);
     this.answer.userId = this.item.userId;
     this.answer.questionId = this.item.id;
+    this.answer.newPosition = this.item.answers.position;
     this.services.saveAnswer(this.answer).subscribe({
       next: (v) => {
         if(v){
