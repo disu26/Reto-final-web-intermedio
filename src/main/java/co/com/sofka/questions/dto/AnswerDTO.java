@@ -14,6 +14,7 @@ import java.util.Optional;
 @Setter
 @NoArgsConstructor
 public class AnswerDTO {
+    private String id;
     @NotBlank(message = "Debe existir el userId para este objeto")
     private String userId;
     @NotBlank

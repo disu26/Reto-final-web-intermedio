@@ -3,6 +3,7 @@ package co.com.sofka.questions.service;
 import co.com.sofka.questions.dto.AnswerDTO;
 import co.com.sofka.questions.dto.QuestionDTO;
 import co.com.sofka.questions.mapper.MapperUtils;
+import co.com.sofka.questions.model.Answer;
 import co.com.sofka.questions.reposioties.AnswerRepository;
 import co.com.sofka.questions.reposioties.QuestionRepository;
 import org.springframework.stereotype.Service;
@@ -30,7 +31,7 @@ public class AnswerService {
         Objects.requireNonNull(answerDTO.getQuestionId(), "Id of the answer is required");
         return getQuestion(answerDTO.getQuestionId())
                     .flatMap(question ->
-                        answerRepository.save(mapperUtils.mapperToAnswer().apply(answerDTO))
+                        answerRepository.save(mapperUtils.mapperToAnswer(answerDTO.getId()).apply(answerDTO))
                                 .map(answer -> {
                                     question.getAnswers().add(answerDTO);
                                     return question;
@@ -56,5 +57,12 @@ public class AnswerService {
                             return question;
                         }
                 );
+    }
+
+    public Mono<String> updateAnswer(AnswerDTO dto){
+        Objects.requireNonNull(dto.getId(), "Id of the question is required");
+        return answerRepository
+                .save(mapperUtils.mapperToAnswer(dto.getId()).apply(dto))
+                .map(Answer::getId);
     }
 }

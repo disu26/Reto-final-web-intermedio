@@ -57,7 +57,7 @@ public class QuestionService {
     
     public Flux<QuestionDTO> getPage(Integer page){
         Long end = Long.valueOf((page+1)*10);
-        
+
         return questionRepository.findAll()
                 .take(end)
                 .takeLast(10)

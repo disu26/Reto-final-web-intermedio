@@ -11,12 +11,10 @@ import reactor.core.publisher.Mono;
 @RestController
 public final class QuestionController {
 
-    private final AnswerService answerService;
 
     private final QuestionService questionService;
 
-    public QuestionController(AnswerService answerService, QuestionService questionService) {
-        this.answerService = answerService;
+    public QuestionController(QuestionService questionService) {
         this.questionService = questionService;
     }
 
@@ -30,19 +28,9 @@ public final class QuestionController {
         return questionService.getOwnerAll(userId);
     }
 
-    @GetMapping("/get/{id}")
-    public Mono<QuestionDTO> getQuestion(@PathVariable("id") String id){
-        return answerService.getQuestion(id);
-    }
-
     @PostMapping("/create")
     public Mono<String> create(@RequestBody QuestionDTO questionDTO){
         return questionService.createQuestion(questionDTO);
-    }
-
-    @PostMapping("/add")
-    public Mono<QuestionDTO> addAnswer(@RequestBody AnswerDTO answerDTO){
-        return answerService.addAnswer(answerDTO);
     }
 
     @DeleteMapping("/delete/{id}")
