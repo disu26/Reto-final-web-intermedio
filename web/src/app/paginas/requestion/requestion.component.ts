@@ -63,6 +63,22 @@ export class RequestionComponent implements OnInit {
     this.currentAnswer+=10;
   }
 
+  updateAnwsers(answer:AnswerI) {
+    let id = this.route.snapshot.paramMap.get('id');
+    answer.id = answer.questionId;
+    answer.newPosition = answer.position;
+
+    if(id){
+      answer.questionId = id;
+    }
+    console.log(answer);
+    
+    this.questionService.updateAnswer(answer).subscribe(data=>{
+      console.log(data);
+    })
+    
+  }
+
   onScroll() {
 
   }
