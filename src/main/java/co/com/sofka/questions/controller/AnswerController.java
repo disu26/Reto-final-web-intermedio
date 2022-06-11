@@ -23,4 +23,9 @@ public class AnswerController {
     public Mono<QuestionDTO> addAnswer(@RequestBody AnswerDTO answerDTO){
         return answerService.addAnswer(answerDTO);
     }
+
+    @PutMapping("/updateAnswer")
+    public Mono<String> updateAnswer(@RequestBody AnswerDTO answerDTO){
+        return answerService.updateAnswer(answerDTO);
+    }
 }
