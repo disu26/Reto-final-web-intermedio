@@ -36,7 +36,8 @@
             <h2 class="accordion-header" id="headingOne">
               <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                 <h5 class="text-center">Respuesta: </h5>
-                <p-rating [cancel]="false" [(ngModel)]="questions.position" [readonly]="true"></p-rating>
+                <p-rating [cancel]="false" [(ngModel)]="questions.position" *ngIf="authService.userData" ></p-rating>
+                <p-rating [cancel]="false" [(ngModel)]="questions.position" *ngIf="!authService.userData" [readonly]="true" ></p-rating>
      
               </button>
             </h2>

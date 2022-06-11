@@ -83,6 +83,14 @@ export class RegistroComponent implements OnInit {
     this.authService
       .loginGoogle(this.form.value.email, this.form.value.password)
       .then((res) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: '!Exitoso¡',
+          detail: 'Usuario Almacenado correctamente',
+        });
+        setTimeout(() => {
+          this.route.navigate(['preguntas']);
+        }, 2000);
         this.mostrar = !this.mostrar;
       });
   }
