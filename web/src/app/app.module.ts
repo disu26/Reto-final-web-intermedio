@@ -21,6 +21,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { RequestionComponent } from './paginas/requestion/requestion.component';
 import { EditComponent } from './paginas/edit/edit.component';
 import { AnswerSortPipePipe } from './pipes/answer-sort-pipe.pipe';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 
 
@@ -48,7 +49,8 @@ import { AnswerSortPipePipe } from './pipes/answer-sort-pipe.pipe';
     HttpClientModule,
     NgbModule,
     FormsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    ScrollingModule
   ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent]
