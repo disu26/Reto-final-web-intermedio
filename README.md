@@ -2,6 +2,7 @@
 Reto final para las training leagues de Sofka U. Angular con firebase y spring con mongo y depsliegue en heroku.
 
 Jorge Steven Reyes
+
 Dimar Andrey Suarez
 
 ## Despliegue:
