@@ -28,11 +28,12 @@ public class QuestionDTO {
     private String category;
     private List<AnswerDTO> answers;
 
-    public QuestionDTO(String userId, String question, String type, String category) {
+    public QuestionDTO(String userId, String question, String type, String category, List<AnswerDTO> answers) {
         this.userId = userId;
         this.question = question;
         this.type = type;
         this.category = category;
+        this.answers = answers;
     }
 
     public QuestionDTO(String id, String userId, String question, String type, String category) {
