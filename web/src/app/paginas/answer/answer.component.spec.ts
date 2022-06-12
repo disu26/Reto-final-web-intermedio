@@ -101,4 +101,50 @@ describe('AnswerComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('Correo Invalido', () => {
+    const email = component.form.controls['email'];
+    email.setValue('pepito')
+    expect(email.valid).toBeFalsy();
+  })
+
+  it('Correo Vacio', () => {
+    const email = component.form.controls['email'];
+    email.setValue('')
+    expect(email.valid).toBeFalsy();
+  })
+
+  it('Correo Valido', () => {
+    const email = component.form.controls['email'];
+    email.setValue('pepito@gmail.com')
+    expect(email.valid).toBeTruthy();
+  })
+  
+
+  it('Contraseña invalida', () => {
+    const password = component.form.controls['password'];
+    password.setValue('1234')
+    expect(password.valid).toBeFalsy();
+  })
+
+  it('Contraseña vacia', () => {
+    const password = component.form.controls['password'];
+    password.setValue('1234')
+    expect(password.valid).toBeFalsy();
+  })
+
+  it('Contraseña valida', () => {
+    const password = component.form.controls['password'];
+    password.setValue('1234567895')
+    expect(password.valid).toBeTruthy();
+  })
+
+  it('Formulario Valido', () => {
+    const form = component.form;
+    const email = component.form.controls['email'];
+    const password = component.form.controls['password'];
+    email.setValue('pepito@gmail.com')
+    password.setValue('1234567895')
+    expect(form.valid).toBeTruthy();
+  })
 });

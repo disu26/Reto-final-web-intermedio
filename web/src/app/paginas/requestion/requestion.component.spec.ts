@@ -95,4 +95,14 @@ describe('RequestionComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('get questions', () => {
+    component.getQuestions('123');
+    expect(component.answers).toBeDefined();
+  })
+
+  it('get 2', () => {
+    component.getQuestions('123');
+    expect(component.answers).toBeDefined();
+  })
 });
