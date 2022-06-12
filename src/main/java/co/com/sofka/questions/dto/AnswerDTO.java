@@ -31,6 +31,14 @@ public class AnswerDTO {
         this.position = position;
     }
 
+    public AnswerDTO(@NotBlank String id, @NotBlank String questionId, @NotBlank String userId, @NotBlank String answer, @NotBlank Integer position) {
+        this.id = id;
+        this.userId = userId;
+        this.questionId = questionId;
+        this.answer = answer;
+        this.position = position;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
