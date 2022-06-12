@@ -71,12 +71,12 @@ export class RequestionComponent implements OnInit {
     if(id){
       answer.questionId = id;
     }
-    console.log(answer);
     
     this.questionService.updateAnswer(answer).subscribe(data=>{
       console.log(data);
     })
     
+    window.location.reload();
   }
 
   onScroll() {
