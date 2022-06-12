@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { MessageService } from 'primeng/api';
@@ -39,7 +38,6 @@ export class QuestionComponent implements OnInit {
     private authService: ServiceService,
     private services: QuestionService,
     private toastr: ToastrService,
-    private route: Router,
     private messageService: MessageService
   ) {}
 

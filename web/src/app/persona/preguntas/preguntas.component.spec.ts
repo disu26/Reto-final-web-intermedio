@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { QuestionService } from 'src/app/Service/question.service';
+import { ServiceService } from 'src/app/Service/service.service';
 
 import { PreguntasComponent } from './preguntas.component';
 
@@ -8,6 +11,11 @@ describe('PreguntasComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [
+        ServiceService,
+        QuestionService,
+        HttpClient
+      ],
       declarations: [ PreguntasComponent ]
     })
     .compileComponents();

@@ -1,6 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AnswerI } from 'src/app/models/answer-i';
 import { QuestionService } from 'src/app/Service/question.service';
@@ -27,8 +25,6 @@ export class AnswerComponent implements OnInit {
   constructor(
     private modalService: NgbModal,
     private services: QuestionService,
-    private toastr: ToastrService,
-    private route: Router,
     private formBuilder: FormBuilder,
     private messageService: MessageService,
     public authService: ServiceService
