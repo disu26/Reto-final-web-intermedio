@@ -9,6 +9,8 @@ Dimar Andrey Suarez
 
 Backend Heroku: https://retofullstack.herokuapp.com/
 
+Swagger Heroku: https://retofullstack.herokuapp.com/webjars/swagger-ui/index.html
+
 Frontend Firebase: https://reto-full-stack.web.app/preguntas
 
 ## Caracteristicas desarrolladas:
