@@ -17,38 +17,58 @@ describe('RegistroComponent', () => {
   let component: RegistroComponent;
   let fixture: ComponentFixture<RegistroComponent>;
 
-  const authState: MockUser = {
+  let authState: MockUser = {
     displayName: '',
     isAnonymous: true,
-    uid: '0XsMDFqqaqgwRHAMwb6AGPgfNrI3'
+    uid: ''
   }
 
-  const mockAngularFireAuth: any = {
-    auth: jasmine.createSpyObj('auth', {
-      'signInAnonymusly': Promise.reject({
-        code: 'auth/operation-not-allowed'
-      }),
-    }),
-    authState : of(authState)
-  };
+  let mockAngularFireAuth: any = null;
 
-  const input: User = {
-      uid: '0XsMDFqqaqgwRHAMwb6AGPgfNrI3',
+  let input: User = {
+      uid: '',
       email: '',
       displayName: '',
       photoURL: '',
       emailVerified: true,
   }
 
-  const data = from(of(input));
+  let angularFireStoreStub: any = null;
 
-  const collectionStub = {
-    valueChanges: jasmine.createSpy('valueChanges').and.returnValue(data)
-  }
-
-  const angularFireStoreStub = {
-    collection: jasmine.createSpy('collection').and.returnValue(collectionStub)
-  }
+  beforeEach(() => {
+    authState = {
+      displayName: '',
+      isAnonymous: true,
+      uid: '0XsMDFqqaqgwRHAMwb6AGPgfNrI3'
+    }
+  
+    mockAngularFireAuth = {
+      auth: jasmine.createSpyObj('auth', {
+        'signInAnonymusly': Promise.reject({
+          code: 'auth/operation-not-allowed'
+        }).catch(err => console.log(err)),
+      }),
+      authState : of(authState)
+    };
+  
+    input = {
+        uid: '0XsMDFqqaqgwRHAMwb6AGPgfNrI3',
+        email: '',
+        displayName: '',
+        photoURL: '',
+        emailVerified: true,
+    }
+  
+    const data = from(of(input));
+  
+    const collectionStub = {
+      valueChanges: jasmine.createSpy('valueChanges').and.returnValue(data)
+    }
+  
+    angularFireStoreStub = {
+      collection: jasmine.createSpy('collection').and.returnValue(collectionStub)
+    }
+  })
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

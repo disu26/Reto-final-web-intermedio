@@ -18,38 +18,58 @@ describe('AnswerComponent', () => {
   let component: AnswerComponent;
   let fixture: ComponentFixture<AnswerComponent>;
 
-  const authState: MockUser = {
+  let authState: MockUser = {
     displayName: '',
     isAnonymous: true,
-    uid: '0XsMDFqqaqgwRHAMwb6AGPgfNrI3'
+    uid: ''
   }
 
-  const mockAngularFireAuth: any = {
-    auth: jasmine.createSpyObj('auth', {
-      'signInAnonymusly': Promise.reject({
-        code: 'auth/operation-not-allowed'
+  let mockAngularFireAuth: any = null;
+
+  let input: User = {
+      uid: '',
+      email: '',
+      displayName: '',
+      photoURL: '',
+      emailVerified: true,
+  }
+
+  let angularFireStoreStub: any = null;
+
+  beforeEach(() => {
+    authState = {
+      displayName: '',
+      isAnonymous: true,
+      uid: '0XsMDFqqaqgwRHAMwb6AGPgfNrI3'
+    }
+  
+    mockAngularFireAuth = {
+      auth: jasmine.createSpyObj('auth', {
+        'signInAnonymusly': Promise.reject({
+          code: 'auth/operation-not-allowed'
+        }).catch(err => console.log(err)),
       }),
-    }),
-    authState : of(authState)
-  };
-
-  const input: User = {
-    uid: '0XsMDFqqaqgwRHAMwb6AGPgfNrI3',
-    email: '',
-    displayName: '',
-    photoURL: '',
-    emailVerified: true,
-  }
-
-  const data = from(of(input));
-
-  const collectionStub = {
-    valueChanges: jasmine.createSpy('valueChanges').and.returnValue(data)
-  }
-
-  const angularFireStoreStub = {
-    collection: jasmine.createSpy('collection').and.returnValue(collectionStub)
-  }
+      authState : of(authState)
+    };
+  
+    input = {
+        uid: '0XsMDFqqaqgwRHAMwb6AGPgfNrI3',
+        email: '',
+        displayName: '',
+        photoURL: '',
+        emailVerified: true,
+    }
+  
+    const data = from(of(input));
+  
+    const collectionStub = {
+      valueChanges: jasmine.createSpy('valueChanges').and.returnValue(data)
+    }
+  
+    angularFireStoreStub = {
+      collection: jasmine.createSpy('collection').and.returnValue(collectionStub)
+    }
+  })
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
