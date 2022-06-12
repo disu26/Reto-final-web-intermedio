@@ -18,38 +18,58 @@ describe('AnswerComponent', () => {
   let component: AnswerComponent;
   let fixture: ComponentFixture<AnswerComponent>;
 
-  const authState: MockUser = {
+  let authState: MockUser = {
     displayName: '',
     isAnonymous: true,
-    uid: '0XsMDFqqaqgwRHAMwb6AGPgfNrI3'
+    uid: ''
   }
 
-  const mockAngularFireAuth: any = {
-    auth: jasmine.createSpyObj('auth', {
-      'signInAnonymusly': Promise.reject({
-        code: 'auth/operation-not-allowed'
+  let mockAngularFireAuth: any = null;
+
+  let input: User = {
+      uid: '',
+      email: '',
+      displayName: '',
+      photoURL: '',
+      emailVerified: true,
+  }
+
+  let angularFireStoreStub: any = null;
+
+  beforeEach(() => {
+    authState = {
+      displayName: '',
+      isAnonymous: true,
+      uid: '0XsMDFqqaqgwRHAMwb6AGPgfNrI3'
+    }
+  
+    mockAngularFireAuth = {
+      auth: jasmine.createSpyObj('auth', {
+        'signInAnonymusly': Promise.reject({
+          code: 'auth/operation-not-allowed'
+        }).catch(err => console.log(err)),
       }),
-    }),
-    authState : of(authState)
-  };
-
-  const input: User = {
-    uid: '0XsMDFqqaqgwRHAMwb6AGPgfNrI3',
-    email: '',
-    displayName: '',
-    photoURL: '',
-    emailVerified: true,
-  }
-
-  const data = from(of(input));
-
-  const collectionStub = {
-    valueChanges: jasmine.createSpy('valueChanges').and.returnValue(data)
-  }
-
-  const angularFireStoreStub = {
-    collection: jasmine.createSpy('collection').and.returnValue(collectionStub)
-  }
+      authState : of(authState)
+    };
+  
+    input = {
+        uid: '0XsMDFqqaqgwRHAMwb6AGPgfNrI3',
+        email: '',
+        displayName: '',
+        photoURL: '',
+        emailVerified: true,
+    }
+  
+    const data = from(of(input));
+  
+    const collectionStub = {
+      valueChanges: jasmine.createSpy('valueChanges').and.returnValue(data)
+    }
+  
+    angularFireStoreStub = {
+      collection: jasmine.createSpy('collection').and.returnValue(collectionStub)
+    }
+  })
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -81,4 +101,50 @@ describe('AnswerComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('Correo Invalido', () => {
+    const email = component.form.controls['email'];
+    email.setValue('pepito')
+    expect(email.valid).toBeFalsy();
+  })
+
+  it('Correo Vacio', () => {
+    const email = component.form.controls['email'];
+    email.setValue('')
+    expect(email.valid).toBeFalsy();
+  })
+
+  it('Correo Valido', () => {
+    const email = component.form.controls['email'];
+    email.setValue('pepito@gmail.com')
+    expect(email.valid).toBeTruthy();
+  })
+  
+
+  it('Contraseña invalida', () => {
+    const password = component.form.controls['password'];
+    password.setValue('1234')
+    expect(password.valid).toBeFalsy();
+  })
+
+  it('Contraseña vacia', () => {
+    const password = component.form.controls['password'];
+    password.setValue('1234')
+    expect(password.valid).toBeFalsy();
+  })
+
+  it('Contraseña valida', () => {
+    const password = component.form.controls['password'];
+    password.setValue('1234567895')
+    expect(password.valid).toBeTruthy();
+  })
+
+  it('Formulario Valido', () => {
+    const form = component.form;
+    const email = component.form.controls['email'];
+    const password = component.form.controls['password'];
+    email.setValue('pepito@gmail.com')
+    password.setValue('1234567895')
+    expect(form.valid).toBeTruthy();
+  })
 });
